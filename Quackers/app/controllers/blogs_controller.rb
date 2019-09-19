@@ -36,12 +36,12 @@ class BlogsController < ApplicationController
   end
 
   def confirm
-    
+
   end
 
   def destroy
     @blog = set_blog.destroy
-    redirect_to blogs_path, notice: "your quack is successfully deleted."
+    redirect_to blogs_path, notice: "Your quack is successfully deleted."
   end
 
   private
