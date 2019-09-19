@@ -1,0 +1,10 @@
+<h2>Preview</h2>
+
+<%= form_with(model: @blog, url: blogs_path, local: true) do |form| %>
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :body %>
+
+  <p><%= @blog.title.upcase %></p>
+  <p><%= @blog.body %></p>
+  <%= form.submit "Confirm" %>
+<% end %>
