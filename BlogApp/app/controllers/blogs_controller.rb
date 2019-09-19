@@ -11,10 +11,14 @@ class BlogsController < ApplicationController
 
   def create
     @blog = Blog.new(strong_params)
-    if @blog.save
-      redirect_to blogs_path, notice: "Your blog is now live."
-    else
+    if params[:back]
       render :new
+    else
+      if @blog.save
+        redirect_to blogs_path, notice: "Your blog is now live."
+      else
+        render :new
+      end
     end
   end
 
