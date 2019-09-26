@@ -10,7 +10,9 @@ class BlogsController < ApplicationController
   end
 
   def create
-    @blog = Blog.new(strong_params)
+    # @blog = Blog.new(strong_params)
+    # @blog.user_id = current_user.id
+    @blog = current_user.blogs.build(strong_params)
     if params[:back]
       render :new
     else
@@ -23,6 +25,7 @@ class BlogsController < ApplicationController
   end
 
   def show
+    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
     @blog = set_blog
   end
 
@@ -45,14 +48,16 @@ class BlogsController < ApplicationController
   end
 
   def confirm
-    @blog = Blog.new(strong_params)
+    # @blog = Blog.new(strong_params)
+    # @blog.user_id = current_user.id
+    @blog = current_user.blogs.build(strong_params)
     render :new if @blog.invalid?
   end
 
   private
 
   def strong_params
-    params.require(:blog).permit(:title, :body)
+    params.require(:blog).permit(:title, :body, )
   end
 
   def set_blog
